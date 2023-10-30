@@ -12,6 +12,8 @@ version 'Alpha'
 -- Manifest
 dependencies {
     'oxmysql',
+    'es_extended',
+    'ox_target',
     'ox_lib',
 }
 
