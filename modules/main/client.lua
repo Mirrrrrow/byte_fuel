@@ -46,7 +46,7 @@ CreateThread(function ()
                 
                 local fuel = GetVehicleFuelLevel(nearestVehicle)
                 local oldFuel = fuel
-                local duration = math.ceil((100 - fuel) / 0.5) * 250
+                local duration = math.ceil((100 - fuel) / settings.refillValue) * settings.refillTick
 
                 local fuelStationData = lib.callback.await('fuel:server:requestStationData', false, nearestFuelstation?.id)
 
@@ -72,13 +72,13 @@ CreateThread(function ()
                 end)
 
                 while isFueling do
-                    fuel += 0.5
+                    fuel += settings.refillValue
 
                     if fuel >= 100 then
                         isFueling = false
                         fuel = 100.0
                     end
-                    Wait(250)
+                    Wait(settings.refillTick)
                 end
 
                 local fuelGain = math.ceil(fuel - oldFuel)
